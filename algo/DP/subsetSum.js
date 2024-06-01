@@ -36,5 +36,24 @@ isSubsetPrestWithSum([2,3,7,8,10],11)
 isSubsetPrestWithSum([2,3,7,8,10],14)
 
 /*
+every cell in the building matrix will give you the result for sub problem.
+matrix[i,j] = will have the result of sub problem of optimal possible value of sum j with i length of elements
+by using this sub problem solution we can build the next cell. which inturn solves the bigger problem
+this is called dynamic programming.
+
+a particular row in the table will give the possibility of sum including the rowth length of elements.
+Hence the every cell in the last row will give you the possibility of sum(j) including all the elements.
+
 once we achieve the desired sum we can return the result.
+
+this can be solved in another way also, instead of calculating sum.
+create the matrix with first column as true -> because sum 0 can be formed with empty subset
+first row as false from index 1 -> empty subset can never form any sum other than 0
+follw the same condition to fill cells which has j<arr[i-1]
+in else condition as we are filling boolean values instead of max check with or condition between including and excluding
+which looks like  matrix[i-1][j-arr[i-1]] || matrix[i-1][j]  (as till the j-arr[i-1] cell there is a subset present, so including current element will give the exect sum of the excpected cell) || excluding this element
+we get the resulted bnoolean in last cell
+
+here i-1 -> previous row
+arr[i-1] -> current element as we have taken 0th index for base condition.
 */
