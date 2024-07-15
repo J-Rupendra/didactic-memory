@@ -79,6 +79,37 @@ class Node{
         let rightSubTreeHeight = this.treeHeight(root.right)
         return Math.max(leftSubTreeHeight, rightSubTreeHeight)+1
       }
+
+      lowestCommonAncestor(node, n1,n2){
+
+        if(!node){
+          return null
+        }
+
+        if(node.data === n1 || node.data === n2){
+          return node
+        }
+
+        const left_lca = this.lowestCommonAncestor(node.left, n1, n2)
+        const right_lca = this.lowestCommonAncestor(node.right, n1, n2)
+
+        if(left_lca && right_lca){
+          return node
+        }
+
+        return left_lca||right_lca
+
+      }
+
+      /*
+
+      in the binary tree we check left, right tree and if the tree has matching value in it then we pass particular node
+      if the left, right tree has no matching value then it will give null 
+      if left tree has a match and right has no match then we pass left subtree instead of node because node is not the ancestor as it's right side tree doesn't have another match
+      same applies for the right tree.
+      when we find both left and right sub trees as not null then this particular node is the ancestor so we pass this node to top level
+      */
+
     }
   
   
