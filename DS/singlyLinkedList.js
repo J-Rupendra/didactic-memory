@@ -65,15 +65,30 @@ class Node{
     reverse(){
       if(this.head === null)
       return
-      let selectedNode = this.head.next
-      let prevNode = this.head
-      while(prevNode.next){
-        prevNode.next = selectedNode.next
-        selectedNode.next = this.head
-        this.head = selectedNode
-        selectedNode = prevNode.next
+      let prev = null
+      let curr = this.head
+      while(curr){
+        let temp = curr.next
+        curr.next = prev
+        prev=curr
+        curr = temp
       }
+      this.head = prev
     }
+
+    recursiveReverse(tempHead){
+      if(tempHead===null || tempHead.next === null){
+        return tempHead
+      }
+      const newHead = this.recursiveReverse(tempHead.next)
+      let newLastNode = tempHead.next
+      newLastNode.next = tempHead
+      tempHead.next = null
+      return newHead
+    }
+
+    // for iterative reversing linked list we can use stack and create a new linked list by popping the elements
+
   }
   
   
@@ -84,7 +99,8 @@ class Node{
   LL.insert(4)
   LL.insert(5)
   LL.print()
-  LL.reverse()
+  // LL.reverse()
+  LL.head = LL.recursiveReverse(LL.head)
   LL.print()
   console.log("size of list :: ",LL.size())
   
@@ -93,6 +109,7 @@ class Node{
 
 // old
 
+/*
 class Node{
     constructor(val){
         this.val=val;
@@ -184,6 +201,6 @@ console.log(list);
 // console.log(list.pop());
 console.log(list.reverse());
 
-
+*/
 
 
